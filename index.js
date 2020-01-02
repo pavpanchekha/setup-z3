@@ -12,13 +12,13 @@ function z3URL(architecture, version) {
 
 (async function() {
     try {
-        // `who-to-greet` input defined in action metadata file
         const architecture = core.getInput('architecture');
         const version = core.getInput('version');
 
         const path = await tc.downloadTool(z3URL(architecture, version));
-        await exec.exec("unzip", [path]);
-        core.addPath(path.replace(/\.zip$/, "/bin"))
+        const dir = await tc.extractZip(path, 'z3')
+        const cachedPath = await tc.cacheDir(dir, 'z3', version);
+        core.addPath(cachedPath + "/bin");
     } catch (error) {
         core.setFailed(error.message);
     }
