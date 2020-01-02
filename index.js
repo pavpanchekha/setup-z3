@@ -17,7 +17,7 @@ function z3URL(architecture, version) {
         const path = await tc.downloadTool(url.path + "/" + url.file);
         const dir = await tc.extractZip(path)
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
-        core.addPath(cachedPath + "/" + url.file + "/bin");
+        core.addPath(cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/bin");
     } catch (error) {
         core.setFailed(error.message);
     }
