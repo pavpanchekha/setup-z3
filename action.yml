@@ -1,0 +1,16 @@
+name: 'Install Z3'
+description: 'Install Z3 to the PATH'
+author: 'pavpanchekha'
+branding:
+  icon: 'download'
+  color: 'blue'
+inputs:
+  architecture:
+    description: 'The target architecture (x86, x64) for Windows builds.'
+    default: 'x64'
+  version:
+    description: 'Version range or exact version of Z3 to use.'
+    default: '7.5'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
