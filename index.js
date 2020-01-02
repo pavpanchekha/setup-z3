@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
-const fs = require('fs');
 
 function z3URL(architecture, version) {
     let distribution = "ubuntu-16.04";
@@ -16,9 +15,7 @@ function z3URL(architecture, version) {
 
         const url = z3URL(architecture, version);
         const path = await tc.downloadTool(url);
-        var contents = fs.readFileSync(path, 'utf8');
-        console.log(contents);
-        const dir = await tc.extractZip(path, '/tmp/z3')
+        const dir = await tc.extractZip(path)
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
         core.addPath(cachedPath + "/bin");
     } catch (error) {
