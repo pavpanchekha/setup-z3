@@ -10,4 +10,4 @@ jobs:
     - name: Setup Z3
       uses: ./
     - name: Test that Z3 is in the path
-      run: echo '(assert true) (check-sat)' | z3 -smt2 -in
+      run: echo $PATH && echo '(assert true) (check-sat)' | z3 -smt2 -in
