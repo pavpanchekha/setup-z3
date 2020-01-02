@@ -180,16 +180,29 @@ module.exports = pump
 
 const core = __webpack_require__(310);
 const github = __webpack_require__(462);
+const tc = __webpack_require__(141);
+const exec = __webpack_require__(273);
 
-try {
-    // `who-to-greet` input defined in action metadata file
-    const architecture = core.getInput('architecture');
-    const version = core.getInput('version');
-
-    
-} catch (error) {
-    core.setFailed(error.message);
+function z3URL(architecture, version) {
+    let distribution = "ubuntu-16.04";
+    let path = "https://github.com/Z3Prover/z3/releases/download/z3-" + version;
+    let file = "z3- " + version + "-" + architecture + "-" + distribution + ".zip";
+    return path + "/" + file;
 }
+
+(async function() {
+    try {
+        // `who-to-greet` input defined in action metadata file
+        const architecture = core.getInput('architecture');
+        const version = core.getInput('version');
+
+        const path = await tc.downloadTool(z3URL(architecture, version));
+        await exec.exec("unzip", [path]);
+        core.addPath(path.replace(/\.zip$/, "/bin"))
+    } catch (error) {
+        core.setFailed(error.message);
+    }
+})();
 
 
 /***/ }),
@@ -3037,6 +3050,14 @@ function paginationMethodsPlugin (octokit) {
 
 /***/ }),
 
+/***/ 141:
+/***/ (function() {
+
+eval("require")("@actions/tool-cache");
+
+
+/***/ }),
+
 /***/ 154:
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -3711,6 +3732,14 @@ function escapeArgument(arg, doubleEscapeMetaChars) {
 
 module.exports.command = escapeCommand;
 module.exports.argument = escapeArgument;
+
+
+/***/ }),
+
+/***/ 273:
+/***/ (function() {
+
+eval("require")("@actions/exec");
 
 
 /***/ }),

@@ -1,0 +1,9 @@
+on: [push]
+
+jobs:
+  run_it:
+    runs-on: ubuntu-latest
+    name: Just runs setup-z3
+    steps:
+    - name: Setup Z3
+      uses: actions/setup-z3@v1
