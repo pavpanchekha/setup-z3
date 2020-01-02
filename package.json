@@ -10,7 +10,7 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/pavpanchekha/setup-z3.git"
-  }
+  },
   "author": "Pavel Panchekha",
   "license": "MIT",
   "dependencies": {
