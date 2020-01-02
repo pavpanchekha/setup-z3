@@ -14,7 +14,9 @@ function z3URL(architecture, version) {
         const architecture = core.getInput('architecture');
         const version = core.getInput('version');
 
-        const path = await tc.downloadTool(z3URL(architecture, version));
+        const url = z3URL(architecture, version);
+        console.log(url);
+        const path = await tc.downloadTool(url);
         const dir = await tc.extractZip(path, 'z3')
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
         core.addPath(cachedPath + "/bin");
