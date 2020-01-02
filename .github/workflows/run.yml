@@ -5,5 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Just runs setup-z3
     steps:
+    - name: Check out code
+      uses: actions/checkout@v1
     - name: Setup Z3
-      uses: pavpanchekha/setup-z3@v1
+      uses: ./
