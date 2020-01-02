@@ -5,7 +5,7 @@ function z3URL(architecture, version) {
     let distribution = "ubuntu-16.04";
     let path = "https://github.com/Z3Prover/z3/releases/download/z3-" + version;
     let file = "z3-" + version + "-" + architecture + "-" + distribution + ".zip";
-    return path + "/" + file;
+    return { path: path, file: file };
 }
 
 (async function() {
@@ -14,10 +14,10 @@ function z3URL(architecture, version) {
         const version = core.getInput('version');
 
         const url = z3URL(architecture, version);
-        const path = await tc.downloadTool(url);
+        const path = await tc.downloadTool(url.path + "/" + url.file);
         const dir = await tc.extractZip(path)
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
-        core.addPath(cachedPath);
+        core.addPath(cachedPath + "/" + url.file + "/bin");
     } catch (error) {
         core.setFailed(error.message);
     }
