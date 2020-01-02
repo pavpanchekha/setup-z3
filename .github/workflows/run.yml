@@ -6,4 +6,4 @@ jobs:
     name: Just runs setup-z3
     steps:
     - name: Setup Z3
-      uses: actions/setup-z3@v1
+      uses: pavpanchekha/setup-z3@v1
