@@ -5,7 +5,7 @@ const exec = require('@actions/exec');
 function z3URL(architecture, version) {
     let distribution = "ubuntu-16.04";
     let path = "https://github.com/Z3Prover/z3/releases/download/z3-" + version;
-    let file = "z3- " + version + "-" + architecture + "-" + distribution + ".zip";
+    let file = "z3-" + version + "-" + architecture + "-" + distribution + ".zip";
     return path + "/" + file;
 }
 
