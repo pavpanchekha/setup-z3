@@ -10,6 +10,6 @@ jobs:
     - name: Setup Z3
       uses: ./
     - name: Print contents of Z3 directory
-      run: ls `echo $PATH | cut -d: -f1`
+      run: "ls `echo $PATH | cut -d: -f1`"
     - name: Test that Z3 is in the path
       run: echo '(assert true) (check-sat)' | z3 -smt2 -in
