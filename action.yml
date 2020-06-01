@@ -10,7 +10,7 @@ inputs:
     default: 'x64'
   version:
     description: 'Version range or exact version of Z3 to use.'
-    default: '4.8.7'
+    default: '4.8.8'
 runs:
   using: 'node12'
   main: 'index.js'
