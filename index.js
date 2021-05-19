@@ -9,8 +9,8 @@ function z3URL(architecture, version, distribution) {
 
 (async function() {
     try {
-        const architecture = core.getInput('architecture') || 'x64';
-        const distribution = core.getInput('distribution') || 'ubuntu-18.04';
+        const architecture = core.getInput('architecture', { required: true });
+        const distribution = core.getInput('distribution', { required: true });
         const version = core.getInput('version', { required: true });
 
         const url = z3URL(architecture, version, distribution);
