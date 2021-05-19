@@ -1,8 +1,7 @@
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
 
-function z3URL(architecture, version) {
-    let distribution = "ubuntu-16.04";
+function z3URL(architecture, version, distribution) {
     let path = "https://github.com/Z3Prover/z3/releases/download/z3-" + version;
     let file = "z3-" + version + "-" + architecture + "-" + distribution + ".zip";
     return { path: path, file: file };
@@ -10,10 +9,11 @@ function z3URL(architecture, version) {
 
 (async function() {
     try {
-        const architecture = core.getInput('architecture');
-        const version = core.getInput('version');
+        const architecture = core.getInput('architecture') || 'x64';
+        const distribution = core.getInput('distribution') || 'ubuntu-18.04';
+        const version = core.getInput('version', { required: true });
 
-        const url = z3URL(architecture, version);
+        const url = z3URL(architecture, version, distribution);
         const path = await tc.downloadTool(url.path + "/" + url.file);
         const dir = await tc.extractZip(path)
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
