@@ -15,5 +15,5 @@ inputs:
     description: 'Version range or exact version of Z3 to use.'
     default: '4.10.2'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'index.js'
