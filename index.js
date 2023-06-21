@@ -7,7 +7,7 @@ function z3URL(architecture, version, distribution) {
     return { path: path, file: file };
 }
 
-(async function() {
+(async function () {
     try {
         const architecture = core.getInput('architecture', { required: true });
         const distribution = core.getInput('distribution', { required: true });
@@ -18,7 +18,8 @@ function z3URL(architecture, version, distribution) {
         const dir = await tc.extractZip(path)
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
         core.addPath(cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/bin");
-	core.exportVariable("CPATH", cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/include");
+        core.exportVariable("CPATH", cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/include");
+        core.exportVariable("Z3_SYS_Z3_HEADER", cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/include/z3.h");
     } catch (error) {
         core.setFailed(error.message);
     }
