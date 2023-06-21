@@ -19,6 +19,7 @@ function z3URL(architecture, version, distribution) {
         const cachedPath = await tc.cacheDir(dir, 'z3', version);
         core.addPath(cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/bin");
         core.exportVariable("CPATH", cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/include");
+        core.exportVariable("LIBRARY_PATH", cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/bin");
         core.exportVariable("Z3_SYS_Z3_HEADER", cachedPath + "/" + url.file.replace(/\.zip$/, "") + "/include/z3.h");
     } catch (error) {
         core.setFailed(error.message);
